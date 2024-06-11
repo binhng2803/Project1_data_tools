@@ -55,6 +55,7 @@ local
 *.db
 /cache
 data/
+/data/*
 
 
 *.sqlite3
