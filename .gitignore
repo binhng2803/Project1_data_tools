@@ -60,3 +60,5 @@ data/
 
 *.sqlite3
 /chromedriver-win64/
+draft.*
+crawler/draft.py
