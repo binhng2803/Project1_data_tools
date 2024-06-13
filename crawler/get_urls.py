@@ -71,14 +71,15 @@ def get_org_link(link):
     return '/'.join(link)
 
 def write2data(img_links):
-    with open('C:\Workspace\Aimesoft\Building\Project1_data_tools\data\img_links.txt', 'a') as f:
+    with open('C:\Workspace\Aimesoft\Building\Project1_data_tools\data\img_links2.txt', 'a') as f:
         for link in img_links:
             f.write(get_org_link(link) + '\n')
 
 if __name__ == '__main__':
     all_links = []
-    urls = ['https://www.pinterest.com/search/pins/?q=design%20building&rs=typed',
-            'https://www.pinterest.com/search/pins/?q=design%20single%20building&rs=typed']
+    # urls = ['https://www.pinterest.com/search/pins/?q=design%20building&rs=typed',
+    #         'https://www.pinterest.com/search/pins/?q=design%20single%20building&rs=typed']
+    urls = ['https://www.pinterest.com/search/pins/?q=design%20skyscraper&rs=typed']
     for url in urls:
         try:
             land_page = Land_page()
