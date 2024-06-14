@@ -12,6 +12,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
+    def __init__(self, image_paths):
+        self.image_paths = image_paths
+    
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(770, 655)
@@ -43,6 +46,7 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.pushButton_4.clicked.connect(self.show_next)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -54,13 +58,31 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(_translate("MainWindow", "straight"))
         self.pushButton_3.setText(_translate("MainWindow", "curved"))
         self.pushButton_4.setText(_translate("MainWindow", "next"))
+        
+    def show_next(self):
+        try:
+            self.label.setPixmap(QtGui.QPixmap(next(self.image_paths)))
+        except:
+            print("No more images to show")
+            exit()
+            
+def get_all_image_paths(img_dir):
+    import os
+    image_names = os.listdir(img_dir)
+    return iter([os.path.join(img_dir, image_name) for image_name in image_names])
+        
 
 
 if __name__ == "__main__":
+    
+    img_dir = '..\data\draft'
+    image_paths = get_all_image_paths(img_dir)
+    # for i in image_paths:
+    #     print(i) 
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Ui_MainWindow(image_paths=image_paths)
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
